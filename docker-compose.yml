@@ -1,0 +1,40 @@
+version: '3.1'
+
+services:
+  app:
+    image: node:14-alpine
+    depends_on:
+      - mongo
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: "npm start"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      MONGO_USERNAME: ${MONGO_USERNAME}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
+  mongo-express:
+    image: mongo-express
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
+  mongo:
+    image: mongo:bionic
+    restart: always
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+      - gutenberg:/data/db
+volumes:
+  gutenberg:

@@ -1,0 +1,31 @@
+{
+  "name": "gutenberg",
+  "version": "0.1.0",
+  "description": "Scraper for project gutenberg",
+  "main": "index.js",
+  "author": "Risto Stevcev",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "gutenbergDir": "./gutenberg/cache/epub",
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha",
+    "coverage": "nyc mocha"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1",
+    "prettier": "^2.0.5"
+  },
+  "dependencies": {
+    "mongodb": "^3.5.7",
+    "xml2js": "^0.4.23"
+  }
+}
